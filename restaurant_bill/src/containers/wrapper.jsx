@@ -9,27 +9,20 @@ class Wrapper extends Component {
       totalBill: 0,
       extraTip: 0,
     }
-    this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange({ target: { name, value } }) {
-    this.setState({ [name]: value });
+    if (value === "" && name === "people"){
+      this.setState({ [name]: 2 });
+    } else if(value === ""){
+      this.setState({ [name]: 0 });
+    } else {
+      this.setState({ [name]: value });
+    }
   }
 
   render() {
     let { people, totalBill, extraTip } = this.state
-    
-    if (extraTip === ""){
-      extraTip = 0;
-    }
-    
-    if ( people === ""){
-      people = 2;
-    } 
-    
-    if ( totalBill === ""){
-      totalBill = 0;
-    }
 
     return (
       <div className="wrapper">
@@ -39,8 +32,8 @@ class Wrapper extends Component {
             id="people"
             name="people"
             type="number"
-            min="0"
-            onChange={this.handleChange}
+            min="2"
+            onChange={(e) => this.handleChange(e)}
             value={people}
           />
         </div>
@@ -52,7 +45,7 @@ class Wrapper extends Component {
             name="totalBill"
             type="number"
             min="0"
-            onChange={this.handleChange}
+            onChange={(e) => this.handleChange(e)}
             value={totalBill}
           />
         </div>
@@ -64,12 +57,12 @@ class Wrapper extends Component {
             name="extraTip"
             type="number"
             min="0"
-            onChange={this.handleChange}
+            onChange={(e) => this.handleChange(e)}
             value={extraTip}  
           />  
         </div>
         <div>
-          <h3>Result: <span>{ calculateBill({ people, totalBill, extraTip }).toFixed(2) }</span></h3>
+          <h3>Result: <span>{ calculateBill(people, totalBill, extraTip).toFixed(2) }</span></h3>
         </div>
       </div>
     );

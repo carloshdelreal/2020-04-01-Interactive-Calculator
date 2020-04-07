@@ -1,6 +1,4 @@
-const calculateBill = (state) => {
-  const { people, totalBill, extraTip } = state;
-
+const calculateBill = (people, totalBill, extraTip) => {
   return (parseFloat(totalBill) + parseFloat(extraTip))/parseFloat(people)
 }
 
